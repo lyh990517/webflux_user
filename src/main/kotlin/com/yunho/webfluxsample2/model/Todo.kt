@@ -1,4 +1,4 @@
-package com.yunho.webfluxsample2.entity
+package com.yunho.webfluxsample2.model
 
 import lombok.Data
 

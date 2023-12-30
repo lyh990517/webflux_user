@@ -14,6 +14,8 @@ class RouteConfig(private val userHandler: UserHandler) {
         "/users".nest {
             GET("", userHandler::getUsers)
             GET("/{id}", userHandler::getUserById)
+            POST("/signup",userHandler::registerUser)
+            DELETE("",userHandler::deleteUser)
         }
     }
 }

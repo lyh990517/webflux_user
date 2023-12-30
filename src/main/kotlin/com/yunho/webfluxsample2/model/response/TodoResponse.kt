@@ -1,4 +1,4 @@
-package com.yunho.webfluxsample2.service
+package com.yunho.webfluxsample2.model.response
 
 import lombok.Data
 

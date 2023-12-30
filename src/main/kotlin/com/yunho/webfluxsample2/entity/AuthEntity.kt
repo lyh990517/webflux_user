@@ -6,7 +6,7 @@ import org.springframework.data.relational.core.mapping.Table
 
 @Data
 @Table("Auth")
-data class Auth(
+data class AuthEntity(
         @Id
         val userid: Long?,
         val token: String
