@@ -13,15 +13,13 @@ import reactor.core.publisher.Mono
 @Component
 class SecurityFilter(private val authService: AuthService): WebFilter {
     override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
-        val token = exchange.request.headers.getFirst("token") ?: ""
-
+        val token = exchange.request.headers.getFirst("token") ?: "not exist"
         return authService.getNameByToken(token).map{
-            Authentication(it.toString())
+            Authentication(it.token)
         }
             .flatMap { auth ->
                 chain.filter(exchange)
                     .contextWrite{ context ->
-                        println("context : $context")
                         val newContext = ReactiveSecurityContextHolder.withAuthentication(auth)
                         context.putAll(newContext)
                     }

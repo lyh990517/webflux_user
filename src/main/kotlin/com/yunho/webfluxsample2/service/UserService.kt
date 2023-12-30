@@ -11,8 +11,8 @@ class UserService(private val userRepository: UserRepository) {
 
     private val webClient = WebClient.create("http://localhost:8081")
 
-    fun getUserById(id: Int): Mono<User> {
-        return userRepository.getUserById(id).flatMap { entity ->
+    fun getUserById(id: Long): Mono<User> {
+        return userRepository.findById(id).flatMap { entity ->
             webClient
                 .get()
                 .uri("/api/{id}", mapOf("id" to id))
@@ -28,7 +28,7 @@ class UserService(private val userRepository: UserRepository) {
     }
 
     fun getUsers(): Mono<List<User>> {
-        return userRepository.getUsers()
+        return userRepository.findAll().collectList()
             .flatMap { list ->
                 webClient
                     .get()

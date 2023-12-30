@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono
 @Component
 class UserHandler(private val userService: UserService) {
     fun getUserById(serverRequest: ServerRequest): Mono<ServerResponse> {
-        val userId = serverRequest.pathVariables()["id"]?.toInt() ?: 1
+        val userId = serverRequest.pathVariables()["id"]?.toLong() ?: 1
 
         return userService.getUserById(userId).flatMap {
             ServerResponse.ok().bodyValue(it)
